@@ -468,12 +468,20 @@ static int safe_strtoll(const char *str, long long *val)
 {
 	long long v;
 	int endidx;
+	char *end;
 	if (!*str)
 		return -EINVAL;
 	errno = 0;
-	if (sscanf(str, "%lli%n", &v, &endidx) < 1)
+	/* TODO alsa configre file parse error. toochain issue.
+	if (sscanf(str, "%Li%n", &v, &endidx) < 1)
 		return -EINVAL;
 	if (str[endidx])
+		return -EINVAL;
+	*/
+	v = strtoll(str, &end, 0);
+	if(errno)
+		return -errno;
+	if(*end)
 		return -EINVAL;
 	*val = v;
 	return 0;
