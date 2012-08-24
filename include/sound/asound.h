@@ -852,7 +852,7 @@ struct sndrv_ctl_elem_value {
 			unsigned int *item_ptr;	/* obsolete */
 		} enumerated;
 		union {
-			unsigned char data[512];
+			unsigned char data[1024];
 			unsigned char *data_ptr;	/* obsolete */
 		} bytes;
 		struct sndrv_aes_iec958 iec958;
